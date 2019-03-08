@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">AndroidChat</string>
+
+    // activity_sign_up
+    <string name="hint_email">Enter email</string>
+    <string name="hint_username">Enter username</string>
+    <string name="btn_go_to_log_in">Go to log in</string>
+    <string name="btn_sign_up">Sign up</string>
+
+    // activity_log_in
+    <string name="hint_email_or_username">Enter email or username</string>
+    <string name="btn_go_to_sign_up">Go to sign up</string>
+    <string name="btn_log_in">Log in</string>
+    <string name="hint_password">Enter password</string>
+    // same for activity_sign_up
+
+    // my_menu
+    <string name="menu_logout_title">Logout</string>
+
 </resources>
