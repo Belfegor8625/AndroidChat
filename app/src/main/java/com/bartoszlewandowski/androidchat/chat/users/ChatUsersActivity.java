@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.bartoszlewandowski.androidchat.R;
+import com.bartoszlewandowski.androidchat.chat.ChatActivity;
 import com.bartoszlewandowski.androidchat.signup.SignUpActivity;
 import com.parse.FindCallback;
 import com.parse.LogOutCallback;
@@ -29,20 +30,21 @@ import static com.bartoszlewandowski.androidchat.consts.DatabaseConstants.USERNA
 
 public class ChatUsersActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.listView)
-    ListView listView;
+    @BindView(R.id.usersListView)
+    ListView usersListView;
     @BindView(R.id.pullToRefreshLayout)
     SwipeRefreshLayout pullToRefreshLayout;
 
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> usersArray;
+    public static final String SELECTED_USER = "selectedUser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_users);
         ButterKnife.bind(this);
-        listView.setOnItemClickListener(this);
+        usersListView.setOnItemClickListener(this);
         fillListView();
         pullToRefreshLayout.setOnRefreshListener(this);
     }
@@ -88,7 +90,7 @@ public class ChatUsersActivity extends AppCompatActivity implements AdapterView.
             for (ParseUser user : users) {
                 usersArray.add(user.getUsername());
             }
-            listView.setAdapter(arrayAdapter);
+            usersListView.setAdapter(arrayAdapter);
         }
     }
 
@@ -124,7 +126,14 @@ public class ChatUsersActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String user = usersArray.get(position);
+        startChatActivityWithUser(user);
+    }
 
+    private void startChatActivityWithUser(String user) {
+        Intent intent = new Intent(ChatUsersActivity.this, ChatActivity.class);
+        intent.putExtra(SELECTED_USER, user);
+        startActivity(intent);
     }
 
 

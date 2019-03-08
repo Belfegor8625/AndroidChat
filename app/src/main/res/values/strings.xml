@@ -17,4 +17,8 @@
     // my_menu
     <string name="menu_logout_title">Logout</string>
 
+    // activity_chat
+    <string name="chat_title">Chat with</string>
+    <string name="btn_send_message">Send Message</string>
+    <string name="hint_type_here">Type something here...</string>
 </resources>
