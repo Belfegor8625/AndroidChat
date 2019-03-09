@@ -98,8 +98,18 @@ public class ChatActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @OnClick(R.id.btnSendMessage)
     public void onClickBtnSendMessage() {
-        String currentUserName = ParseUser.getCurrentUser().getUsername();
         final String message = edtMessage.getText().toString();
+        if (messageNotEmpty(message)) {
+            sendMessage(message);
+        }
+    }
+
+    private boolean messageNotEmpty(String message) {
+        return !message.equals("");
+    }
+
+    private void sendMessage(final String message) {
+        String currentUserName = ParseUser.getCurrentUser().getUsername();
         makeChatParseObjectWithData(currentUserName, message).saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
